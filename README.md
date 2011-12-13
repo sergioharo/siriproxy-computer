@@ -4,6 +4,8 @@ Open program *Program Name*
 
 Quit program *Program Name*
 
+iTunes search  (search for a song name)
+
 iTunes pause, stop playing, stop
 
 iTunes play, start playing, start
