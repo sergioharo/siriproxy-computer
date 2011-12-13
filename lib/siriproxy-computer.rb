@@ -116,6 +116,7 @@ end
         say "Ok. I turned off the visualizer."
     elsif userAction == "search"
         whattoplay = ask "What should I play for you?"
+        whattoplay.strip!
         `osascript -e 'tell application "iTunes" to activate' -e 'tell application "iTunes" to play track "#{whattoplay}"'`
         say "Trying to play a song called #{whattoplay}"
     else
