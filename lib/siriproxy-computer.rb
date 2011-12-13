@@ -114,6 +114,10 @@ end
     elsif userAction == "stop visuals" or userAction == "stop the visualizer" then
         `osascript -e 'tell application "iTunes" to activate' -e 'tell application "iTunes" to set visuals enabled to false'`
         say "Ok. I turned off the visualizer."
+    elsif userAction == "search"
+        whattoplay = ask "What should I play for you?"
+        `osascript -e 'tell application "iTunes" to activate' -e 'tell application "iTunes" to play track "#{whattoplay}"'`
+        say "Trying to play a song called #{whattoplay}"
     else
 		say "That isn't something I can do right now."
 	end
