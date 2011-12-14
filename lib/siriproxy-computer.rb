@@ -29,11 +29,11 @@ listen_for /quit program (.*)/i do |userAction|
 	say "Quitting #{userAction.chop}."
     request_completed
 end
-  playingname = %x[osascript -e 'tell application "iTunes" to name of current track as string']
-  playingartist = %x[osascript -e 'tell application "iTunes" to artist of current track as string']
+
 
   listen_for /itunes (.*)/i do |userAction|
       userAction.strip!
+
 	if userAction == "pause" or userAction == "stop playing" or userAction == "stop" then
 		`osascript -e 'tell application "iTunes" to pause'`
 		say "I paused iTunes for you."
