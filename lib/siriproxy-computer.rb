@@ -31,7 +31,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     request_completed
   end
 
-  listen_for /mac (.*)/i do |userAction|
+  listen_for /itunes (.*)/i do |userAction|
     userAction.strip!
 
     if userAction == "pause" or userAction == "stop playing" or userAction == "stop" then
@@ -125,7 +125,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     request_completed
   end
 
-  listen_for /find her (.*)/i do |userAction|
+  listen_for /(find her|finder) (.*)/i do |userAction|
     userAction.strip!
     if userAction == "move to trash" or userAction == "delete that" then
       `osascript -e 'tell application "Finder" to activate' -e 'tell application "System Events" to key code 51 using command down'`
@@ -162,6 +162,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     end
     request_completed
   end
+
   listen_for /mail (.*)/i do |userAction|
     userAction.strip!
     if userAction == "check for new" or userAction == "check" or userAction == "unread" or userAction == "get new" then
@@ -186,6 +187,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     end
     request_completed
   end
+
   listen_for /transmission (.*)/i do |userAction|
     userAction.strip!
     if userAction == "pause" or userAction == "pause all" or userAction == "pause transfers" then
@@ -199,6 +201,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     end
     request_completed
   end
+
   listen_for /type (.*)/i do |whattotype|
     if whattotype == "" then
       begin
@@ -249,6 +252,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     end
     request_completed
   end
+
   listen_for /open a website/i do
     url = ask "What URL?"
     url.gsub!(/ /,'')
@@ -256,6 +260,7 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     say "Opening #{url.downcase} in your web browser."
     request_completed
   end
+
   listen_for /spotlight search/i do
     text = ask "What do you want to search for?"
     text.strip!
@@ -265,46 +270,55 @@ class SiriProxy::Plugin::Computer < SiriProxy::Plugin
     say "Searching for #{text}."
     request_completed
   end
+
   listen_for /hide this window/i do
     `osascript -e 'tell application "System Events" to keystroke "h" using command down'`
     say "Ok. I hid that window. Oh no..can you find it?"
     request_completed
   end
+
   listen_for /hide all other windows/i do
     `osascript -e 'tell application "System Events" to keystroke "h" using {command down, option down}'`
     say "I hid all of the other windows. Where did they go??"
     request_completed
   end
+
   listen_for /show the desktop/i do
     `osascript -e 'do shell script "/Applications/Utilities/Expose.app/Contents/MacOS/Expose 1"'`
     say "I hid your windows, can you find them?"
     request_completed
   end
+
   listen_for /show all windows/i do
     `osascript -e 'tell application "System Events" to set visible of (every process whose visible is false) to true'`
     say "All windows are now visible."
     request_completed
   end
+
   listen_for /start my screensaver/i do
     `osascript -e 'do shell script "/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"'`
     say "Screensaver started."
     request_completed
   end
+
   listen_for /toggle fullscreen/i do
     `osascript -e 'tell application "System Events" to keystroke "f" using {control down, command down}'`
     say "Full screen mode toggled."
     request_completed
   end
+
   listen_for /mission control/i do
     `osascript -e 'tell application "System Events" to keystroke (ASCII character 30) using control down --up arrow'`
     say "There you go."
     request_completed
   end
+
   listen_for /next space/i do
     `osascript -e 'tell application "System Events" to keystroke (ASCII character 29) using control down -- right arrow'`
     say "Moving to the next space in Mission Control."
     request_completed
   end
+  
   listen_for /previous space/i do
     `osascript -e 'tell application "System Events" to keystroke (ASCII character 28) using control down -- right arrow'`
     say "Moving to the previous space in Mission Control."
