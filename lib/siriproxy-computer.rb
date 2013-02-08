@@ -31,7 +31,7 @@ listen_for /quit program (.*)/i do |userAction|
 end
 
 
-  listen_for /itunes (.*)/i do |userAction|
+  listen_for /mac (.*)/i do |userAction|
       userAction.strip!
 
 	if userAction == "pause" or userAction == "stop playing" or userAction == "stop" then
